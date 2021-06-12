@@ -1,18 +1,11 @@
 node {
-    def app
-    def docker
-    
+	stage('========== Clone repository ==========') {
+		checkout scm
+	} 
+	stage('========== Build image ==========') { 
+		app = docker.build("kimsh03/my-image")
+	} 
+	stage('========== Push image ==========') {
 
-    stage('Build and Test') {
-            agent {
-                docker {
-                    image 'maven:3-alpine'
-                    args '-v /root/.m2:/root/.m2'
-                }
-            }
-
-            steps {
-                sh 'mvn -B -DskipTests clean package'
-            }
-    }
+	}
 }
