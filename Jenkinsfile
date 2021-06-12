@@ -1,12 +1,8 @@
 node {
-    agent none
-    def app
-    def docker
-    
-    stage("build") { 
 
-    } 
-    stage("report") { 
+    def mvnHome
 
-    } 
+    stage('Deploy') {
+        echo "Deploy is not yet implemented"
+    }
 }
