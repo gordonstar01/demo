@@ -4,9 +4,9 @@ node {
     def docker
     
     stage("build") { 
-        step step ... 
+
     } 
     stage("report") { 
-        step step ... 
+
     } 
 }
