@@ -1,22 +1,14 @@
-podTemplate(
-    label: 'mypod',
-    volumes: [
-        emptyDirVolume(mountPath: '/etc/gitrepo', memory: false),
-        hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock')
-    ],
-    containers:
-    [
-        containerTemplate(name: 'git', image: 'alpine/git', ttyEnabled: true, command: 'cat')
-    ]
-)
+podTemplate(containers: [
+    containerTemplate(name: 'maven', image: 'maven:3.3.9-jdk-8-alpine', ttyEnabled: true, command: 'cat'),
+  ]) {
 
-node {
-	stage('========== Clone repository ==========') {
-		checkout scm
-	} 
-	stage('========== Build image ==========') { 
-	} 
-	stage('========== Push image ==========') {
-
-	}
-}
+    node(POD_LABEL) {
+        stage('Get a Maven project') {
+            git 'https://github.com/jenkinsci/kubernetes-plugin.git'
+            container('maven') {
+                stage('Build a Maven project') {
+                    sh 'mvn -B clean install'
+                }
+            }
+        }
+    }
