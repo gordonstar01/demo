@@ -1,5 +1,8 @@
 pipeline {
     agent none
+    def app
+    def docker
+    
     options { skipDefaultCheckout(true) }
     stages {
         stage('Build and Test') {
