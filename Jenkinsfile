@@ -1,4 +1,4 @@
-pipeline {
+node {
     agent none
     def app
     def docker
