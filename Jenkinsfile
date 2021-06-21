@@ -1,6 +1,19 @@
  node {
      def app
 
+	tools {
+        maven 'Maven3' 
+    }
+    
+    stage('parameter check')
+    	{
+    		steps
+    		{
+    			 echo "Current workspace : ${workspace}"
+    			 sh 'mvn -version'
+    		}
+    	}
+    	
      stage('Clone repository') {
          /* Let's make sure we have the repository cloned to our workspace */
  
