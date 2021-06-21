@@ -10,10 +10,17 @@ pipeline {
         stage('Build') { 
             steps {
                 sh 'mvn -B -DskipTests clean package' 
-                
-                app = docker.build("kimsh03/jenkins-test:latest")
             }
         }
+        
+		stage('Building image') {
+			steps{
+				script {
+					docker.build "kimsh03/jenkins-test:latest"
+				}
+			}
+		}
+    
      
 	 
 	}
