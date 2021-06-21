@@ -1,14 +1,23 @@
-pipeline {
-    environment {
-        registry = "kimsh03/jenkins_test"
-        registryCredential = 'dockerhub'
-    }
-    agent any
-    stages {
-        stage('Build docker image') {
-            steps {
-                sh 'docker build -t $registry:latest .'
-            }
-        }
+ node {
+     def app
+
+     stage('Clone repository') {
+         /* Let's make sure we have the repository cloned to our workspace */
+
+         checkout scm
      }
-}
+
+     stage('Build image') {
+         /* This builds the actual image; synonymous to
+         * docker build on the command line */
+
+         app = docker.build("kimsh03/jenkins-test:latest")
+     }
+
+     stage('Test image') {
+         app.inside {
+             sh 'echo "Tests passed"'
+         }
+     }
+
+ }
