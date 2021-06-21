@@ -1,6 +1,6 @@
 pipeline {
     environment {
-        registry = "kimsh03/jenkins"
+        registry = "kimsh03/jenkins_test"
         registryCredential = 'dockerhub'
     }
     agent any
