@@ -1,12 +1,14 @@
 pipeline {
-    agent {
-        docker { image 'node:14-alpine' }
+    environment {
+        registry = "kimsh03/jenkins"
+        registryCredential = 'dockerhub'
     }
+    agent any
     stages {
-        stage('Test') {
+        stage('Build docker image') {
             steps {
-                sh 'node --version'
+                sh 'docker build -t $registry:latest .'
             }
         }
-    }
+     }
 }
